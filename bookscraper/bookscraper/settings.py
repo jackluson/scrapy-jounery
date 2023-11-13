@@ -16,12 +16,12 @@ FEEDS = {
     'booksdata.json': {'format': 'json'},
 }
 
-SCRAPEOPS_API_KEY = 'e0b394fb-611a-4053-9aa4-448ef8768fab' # signup at https://scrapeops.io
+SCRAPEOPS_API_KEY = 'your api key' # signup at https://scrapeops.io
 SCRAPEOPS_FAKE_USER_AGENT_ENDPOINT = 'https://headers.scrapeops.io/v1/user-agents'
-SCRAPEOPS_FAKE_USER_AGENT_ENABLED = True
+SCRAPEOPS_FAKE_USER_AGENT_ENABLED = False
 SCRAPEOPS_NUM_RESULTS = 50
 
-SCRAPEOPS_PROXY_ENABLED = True
+SCRAPEOPS_PROXY_ENABLED = False
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = "bookscraper (+http://www.yourdomain.com)"
