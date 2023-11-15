@@ -11,25 +11,24 @@ from urllib.parse import urlencode
 class BookspiderSpider(scrapy.Spider):
     name = "bookspider"
     # allowed_domains = ["books.toscrape.com", "proxy.scrapeops.io"]
-    start_urls = ["https://books.toscrape.com", "http://books.toscrape.com?page=2"]
+    start_urls = ["https://books.toscrape.com"]
     
     custom_settings = {
         'FEEDS': {
             'booksdata.json': {'format': 'json', 'overwrite': True},
-            'booksdata.csv': {'format': 'csv'},
+            # 'booksdata.csv': {'format': 'csv'},
         }
     }
 
     def parse(self, response):
-        print('here in', response.url)
         books = response.css("article.product_pod")
-        start = 0
-        end = 2
-        if 'page' in response.url:
-            start = 2
-            end = 4
-        print("start", start, 'end', end, 'len', len(books))
-        for book in books[start:end]:
+        # start = 0
+        # end = 2
+        # if 'page' in response.url:
+        #     start = 2
+        #     end = 4
+        # print("start", start, 'end', end, 'len', len(books))
+        for book in books:
             # title = book.xpath("./h3/a/@title").extract_first()
             # price = book.css("p.price_color::text").extract_first()
             # url = book.css("h3 a::attr(href)").extract_first()
@@ -39,7 +38,7 @@ class BookspiderSpider(scrapy.Spider):
             yield scrapy.Request(absolute_url, callback=self.parse_book)
             
         next_page = response.css("ul.pager li.next a::attr(href)").get()
-        if next_page and None:
+        if next_page:
             next_page = response.urljoin(next_page)
             # yield response.follow(next_page, callback=self.parse)
             yield scrapy.Request(next_page, callback=self.parse)
